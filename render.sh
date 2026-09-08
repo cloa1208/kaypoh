@@ -10,6 +10,7 @@ ABS="$(cd "$(dirname "$IN")" && pwd)/$(basename "$IN")"
 
 for BIN in google-chrome google-chrome-stable chromium chromium-browser \
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  "$HOME"/Library/Caches/ms-playwright/chromium-*/chrome-mac-arm64/"Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing" \
   "$HOME"/Library/Caches/ms-playwright/chromium-*/chrome-mac-arm64/Chromium.app/Contents/MacOS/Chromium; do
   if command -v "$BIN" >/dev/null 2>&1 || [ -x "$BIN" ]; then
     "$BIN" --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
