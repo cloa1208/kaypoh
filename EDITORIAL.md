@@ -71,4 +71,4 @@ Fashion and design: Common Rare, Invade, Makers Market, Design Orchard, Dover St
 - Reader: Calvin. The routine prompt holds the delivery address. Friends receive forwards, not direct sends.
 - Issue numbers increment by one each week. Issue 001 was Thu 10 Sep 2026.
 - Design is fixed. Do not change the CSS. Change only the content inside the existing structure.
-- Photos are hotlinked from the organiser or venue where possible, then from food media as a fallback, credited in the footer.
+- Photos are hotlinked from the organiser or venue where possible, then from food media as a fallback, credited in the footer. Prefer photographs over key visuals that carry their own large text (a poster's headline fights the tile caption).

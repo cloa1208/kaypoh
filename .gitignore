@@ -1,2 +1,4 @@
 lean-*.png
 .DS_Store
+issues/*-img/
+issues/*.render.html

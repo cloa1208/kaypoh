@@ -6,6 +6,11 @@
 set -u
 IN="$1"
 OUT="${IN%.html}.pdf"
+# Downscale hotlinked photos into a render copy so the PDF stays small (see prep_images.py).
+HERE="$(cd "$(dirname "$0")" && pwd)"
+if [ -f "$HERE/prep_images.py" ] && [ "${IN%.render.html}" = "$IN" ]; then
+  if python3 "$HERE/prep_images.py" "$IN" >&2; then IN="${IN%.html}.render.html"; fi
+fi
 ABS="$(cd "$(dirname "$IN")" && pwd)/$(basename "$IN")"
 
 for BIN in google-chrome google-chrome-stable chromium chromium-browser \
