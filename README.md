@@ -7,4 +7,4 @@ Weekly two-page Singapore newsletter. Produced every Thursday by a scheduled Cla
 - `issues/` — one HTML (and PDF when rendered) per issue, named `YYYY-MM-DD-issue-NNN`.
 - `render.sh` — renders an issue HTML to A4 PDF with whatever browser is available.
 
-Design decisions are settled. Issue 001 (10 Sep 2026) is the reference for tone and layout.
+Design decisions are settled. Issue 001 r2 (10 Sep 2026, Mira's edition) is the reference for tone and layout.

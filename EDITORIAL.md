@@ -32,6 +32,7 @@ Kaypoh is a weekly, two-page Singapore newsletter for one reader and his friends
 - Prefer first outlets and chef-led openings over second outlets of existing chains.
 - At least one under $25 per person. At least one date-night pick. At least one group or brunch pick.
 - Each gets: price per person, two tags (Book / Walk-in / Queue, plus a vibe tag), an Order line, a Why line, a Go line with address or MRT.
+- The featured pick (number 1) is a restaurant where you sit down to a meal. Never a dessert place, cafe or bakery; those belong in the Coffee strip or as pick 4 or 5.
 - The featured pick is the one a foodie would screenshot.
 
 **Drink and Coffee strips.** Two bars, two cafes or bakeries. One line each.
@@ -69,6 +70,7 @@ Fashion and design: Common Rare, Invade, Makers Market, Design Orchard, Dover St
 ## Facts that stay true across issues
 
 - Reader: Calvin. The routine prompt holds the delivery address. Friends receive forwards, not direct sends.
-- Issue numbers increment by one each week. Issue 001 was Thu 10 Sep 2026.
+- Issue numbers increment by one each week. Issue 001 was Thu 10 Sep 2026; its r2 edition (Mira's) is the reference for tone and picks.
+- A re-run of the same week is a refresh: keep existing picks unless something better turns up or a fact changed. Never churn for novelty.
 - Design is fixed. Do not change the CSS. Change only the content inside the existing structure.
 - Photos are hotlinked from the organiser or venue where possible, then from food media as a fallback, credited in the footer. Prefer photographs over key visuals that carry their own large text (a poster's headline fights the tile caption).
