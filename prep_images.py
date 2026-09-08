@@ -9,8 +9,8 @@ Stdlib only.
 """
 import os, re, sys, hashlib, shutil, subprocess, urllib.request
 
-MAX_W = 1400          # px, plenty for an A4 page at print quality
-QUALITY = "72"        # jpeg quality for sips
+MAX_W = 1000          # px; tiles are ~260 CSS px wide, hero ~700, so 1000 is 2x for everything but the hero
+QUALITY = "62"        # jpeg quality for sips
 
 
 def fetch(url, dest):
