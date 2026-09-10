@@ -20,7 +20,19 @@ for BIN in google-chrome google-chrome-stable chromium chromium-browser \
   if command -v "$BIN" >/dev/null 2>&1 || [ -x "$BIN" ]; then
     "$BIN" --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
       --virtual-time-budget=10000 --print-to-pdf="$OUT" "file://$ABS" >/dev/null 2>&1
-    if [ -s "$OUT" ]; then echo "$OUT"; exit 0; fi
+    if [ -s "$OUT" ]; then
+      # Fit report: the page script zooms overflowing content down so nothing prints over the
+      # footer; anything under 1.00 means the editor should cut a line or an item on that page.
+      "$BIN" --headless=new --disable-gpu --no-sandbox --virtual-time-budget=10000 --dump-dom "file://$ABS" 2>/dev/null \
+        | grep -o 'class="page[^"]*"[^>]*data-fit="[0-9.]*"\( data-overflow="[0-9]*"\)\?' \
+        | sed -E 's/class="page ([a-z]+)".*data-fit="([0-9.]+)"( data-overflow="([0-9]+)")?/\1 \2 \4/' \
+        | while read -r PG FITZ OVF; do
+            if [ "$FITZ" != "1.00" ]; then
+              echo "FIT WARNING: page '$PG' content was scaled to $FITZ to clear the footer${OVF:+ (still ${OVF}px over)}. Cut a line or a list item on that page and re-render until it reports 1.00." >&2
+            fi
+          done
+      echo "$OUT"; exit 0
+    fi
   fi
 done
 

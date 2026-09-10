@@ -37,7 +37,7 @@ Kaypoh is a weekly, two-page Singapore newsletter for one reader and his friends
 
 **Drink and Coffee strips.** Two bars, two cafes or bakeries. One line each.
 
-**Pop-ups and Drops.** Three photo tiles: one opening this week, one to buy early for next week, one seasonal. Include a fashion or design item every week (markets, sample sales, brand pop-ups, sneaker drops). Then three short lists: Also on, Last call (closing this Sunday), Next week.
+**Pop-ups and Drops.** Three photo tiles: one opening this week, one to buy early for next week, one seasonal. Include a fashion or design item every week (markets, sample sales, brand pop-ups, sneaker drops). Then three short lists: Also on, Last call (closing this Sunday), Next week. Page 2 has no spare height: at most two items in Also on (including Not the Merlion), three in Last call, two in Next week, each one or two lines. If render.sh prints a FIT WARNING, cut here first.
 
 **Not the Merlion.** One off-beat attraction, inside Also on. Free if possible.
 
