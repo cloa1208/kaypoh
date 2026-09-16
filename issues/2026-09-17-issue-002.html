@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<title>Kaypoh · Issue 002</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --ink:#17150f; --ink-2:#3f3b33; --muted:#6d675d; --line:#e4ded3;
+    --paper:#faf7f1; --card:#ffffff;
+    --red:#c9302a; --red-soft:#fbe6e3;
+    --gold:#d9a02b; --gold-soft:#fbefd2; --gold-ink:#6b4c00;
+    --teal:#146b72; --teal-soft:#dfeeef;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:Inter,-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:10pt;line-height:1.42;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:inherit;text-decoration:none}
+  .page{width:210mm;height:297mm;padding:11mm 13mm 10mm;overflow:hidden;position:relative;background:var(--paper)}
+  .page.one{page-break-after:always}
+  h1,h2,h3,h4,p,ul{margin:0}
+  b{font-weight:700}
+  .F{font-family:Fraunces,"Georgia",serif;font-weight:900}
+
+  /* masthead */
+  .mast{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:7px;border-bottom:3px solid var(--ink)}
+  .mast .name{font-family:Fraunces,"Georgia",serif;font-weight:900;font-size:34pt;letter-spacing:-1.5px;line-height:.95}
+  .mast .name span{color:var(--red)}
+  .mast .tag{font-family:Fraunces,"Georgia",serif;font-style:italic;font-weight:700;color:var(--ink-2);font-size:10.5pt;margin-top:6px}
+  .mast .meta{text-align:right;font-size:7.6pt;color:var(--muted);text-transform:uppercase;letter-spacing:1.3px;line-height:1.7;font-weight:600}
+
+  /* tldr */
+  .tldr{display:grid;grid-template-columns:34mm 1fr 1fr 1fr;margin:9px 0 10px;border:1px solid var(--line);background:var(--card);border-radius:10px;overflow:hidden}
+  .tldr .h{background:var(--ink);color:#fff;font-weight:800;font-size:7.6pt;letter-spacing:1.4px;text-transform:uppercase;padding:10px 12px;display:flex;align-items:center;line-height:1.2}
+  .tldr .i{padding:9px 12px;border-left:1px solid var(--line);font-size:9.2pt;line-height:1.35}
+  .tldr .i b{display:block;font-size:7.2pt;letter-spacing:1.4px;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+
+  /* section label */
+  .lab{display:flex;align-items:baseline;gap:8px;margin:0 0 8px}
+  .lab h2{font-family:Fraunces,"Georgia",serif;font-weight:900;font-size:15.5pt;letter-spacing:-.4px}
+  .lab .k{margin-left:auto;font-size:7.4pt;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+
+  /* hero */
+  .hero{position:relative;height:88mm;border-radius:12px;overflow:hidden;background:#000}
+  .hero img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 28%,rgba(0,0,0,.62) 58%,rgba(0,0,0,.9) 100%)}
+  .hero .txt{position:absolute;left:0;right:0;bottom:0;padding:14px 18px 15px;color:#fff}
+  .hero .kick{font-size:7.6pt;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);font-weight:800}
+  .hero h3{font-family:Fraunces,"Georgia",serif;font-weight:900;font-size:24pt;letter-spacing:-.6px;line-height:1.02;margin:4px 0 9px}
+  .hero ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+  .hero li{font-size:9pt;color:#f1ece3;padding-left:11px;position:relative;line-height:1.32}
+  .hero li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .hero li b{color:#fff}
+  .pin{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:7.2pt;letter-spacing:1.3px;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+  .pin.gold{background:var(--gold);color:#fff}
+  .pin.ink{background:var(--ink);color:#fff}
+  .hero .pin{position:absolute;top:11px;left:13px}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin-top:7mm}
+
+  /* tickets */
+  .tile{position:relative;border-radius:10px;overflow:hidden;height:34mm;background:#000;display:block}
+  .tile img{width:100%;height:100%;object-fit:cover;object-position:center 4%;display:block;transform:scale(2.6);transform-origin:50% 0}
+  .tile .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.6) 40%,rgba(0,0,0,.93) 100%)}
+  .tile .t{position:absolute;left:0;right:0;bottom:0;padding:9px 11px;color:#fff}
+  .tile .t b{font-size:11pt;display:block;margin-bottom:2px}
+  .tile .t span{font-size:8.4pt;color:#eee;display:block;line-height:1.3}
+  .tile .pin{position:absolute;top:8px;left:9px}
+  .tk{list-style:none;margin:8px 0 0;padding:0}
+  .tk li{display:grid;grid-template-columns:50px 1fr;gap:9px;align-items:start;padding:6px 0;border-top:1px solid var(--line)}
+  .tk li:first-child{border-top:0}
+  .st{font-size:6.6pt;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:4px;padding:3px 0;text-align:center;margin-top:2px}
+  .st.on{background:var(--teal-soft);color:var(--teal)} .st.re{background:var(--gold-soft);color:var(--gold-ink)} .st.pp{background:var(--red-soft);color:var(--red)} .st.wk{background:var(--ink);color:#fff}
+  .tk .w b{display:block;font-size:9.2pt}
+  .tk .w span{color:var(--ink-2);font-size:8.4pt;display:block}
+  .also{margin-top:8px;font-size:8.2pt;color:var(--ink-2);line-height:1.5;padding-top:6px;border-top:1px solid var(--line)}
+  .also b{color:var(--ink)}
+
+  /* plan */
+  .cost{display:flex;gap:6px;margin:0 0 8px}
+  .cost div{flex:1;background:var(--teal-soft);border-radius:8px;padding:7px 9px;font-size:7.8pt;color:var(--teal);line-height:1.25;font-weight:600}
+  .cost div b{display:block;font-family:Fraunces,serif;font-weight:900;font-size:14pt;color:var(--ink);margin-bottom:1px}
+  .tl{list-style:none;margin:0;padding:0}
+  .tl li{display:flex;gap:9px;padding:6px 0;border-top:1px solid var(--line)}
+  .tl li:first-child{border-top:0}
+  .tl .tm{flex:none;width:44px;font-weight:800;color:var(--teal);font-size:9.4pt}
+  .tl .w b{display:block;font-size:9.4pt}
+  .tl .w span{font-size:8.5pt;color:var(--ink-2);display:block}
+  .sun{margin-top:8px;background:#f0ebe2;border-radius:8px;padding:8px 11px;font-size:8.5pt;line-height:1.4}
+  .sun b{display:block;margin-bottom:1px}
+
+  /* eat */
+  .eat{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .eat .c{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;display:block}
+  .eat img{width:100%;height:25mm;object-fit:cover;display:block}
+  .eat .no{position:absolute;top:6px;left:6px;width:19px;height:19px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:8.4pt;display:flex;align-items:center;justify-content:center}
+  .eat .b{padding:8px 9px 9px}
+  .eat .n{font-family:Fraunces,serif;font-weight:900;font-size:10.6pt;line-height:1.1;letter-spacing:-.2px}
+  .eat .pr{font-weight:800;color:var(--red);font-size:8.4pt;margin:3px 0 5px}
+  .tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+  .tg{font-size:6.6pt;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:#efe9de;color:#4a4438}
+  .tg.bk{background:var(--teal-soft);color:var(--teal)} .tg.vb{background:var(--gold-soft);color:var(--gold-ink)}
+  .eat .ln{font-size:7.8pt;line-height:1.3;color:var(--ink-2);margin-top:2px}
+  .eat .ln b{color:var(--ink)}
+  .strip{display:grid;grid-template-columns:24mm 1fr 1fr;margin-top:6px;background:#f0ebe2;border-radius:8px;overflow:hidden;font-size:8.3pt}
+  .strip.hy{grid-template-columns:16mm 1fr 16mm 1fr}
+  .strip .h{padding:8px 10px;font-weight:800;font-size:7.2pt;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center}
+  .strip .i{padding:5px 11px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #ddd6c8;line-height:1.35}
+  .strip .i b{display:block}
+  .strip .h.go{color:var(--teal);background:var(--teal-soft);justify-content:center}
+  .strip .h.skip{color:var(--red);background:var(--red-soft);justify-content:center}
+
+  /* pop */
+  .pop{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+  .pop .c{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;display:block}
+  .pop img{width:100%;height:26mm;object-fit:cover;display:block}
+  .pop .c:first-child img{object-position:8% 50%}
+  .pop .c:nth-child(3) img{object-position:50% 72%}
+  .pop .pin{position:absolute;top:8px;left:8px}
+  .pop .b{padding:8px 10px 9px}
+  .pop .n{font-family:Fraunces,serif;font-weight:900;font-size:10.8pt;line-height:1.1;letter-spacing:-.2px;margin-bottom:4px}
+  .pop .ln{font-size:8pt;color:var(--ink-2);line-height:1.32}
+  .pop .ln b{color:var(--ink)}
+  .more{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:7px}
+  .more .h{font-size:7.2pt;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);font-weight:800;display:block;margin-bottom:4px}
+  ul.b{list-style:none;padding:0}
+  ul.b li{font-size:8.3pt;color:var(--ink-2);padding:3px 0 3px 11px;position:relative;line-height:1.32}
+  ul.b li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--red)}
+  ul.b li b{color:var(--ink)}
+
+  /* hype */
+  .hype{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .hype .c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:8.6pt;line-height:1.4}
+  .hype .n{font-family:Fraunces,serif;font-weight:900;font-size:10.6pt;margin-bottom:3px}
+  .hype .l{font-size:6.8pt;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .hype .v{font-weight:700}
+  .hype .v.go{color:var(--teal)} .hype .v.skip{color:var(--red)}
+
+  .foot{position:absolute;left:13mm;right:13mm;bottom:7mm;padding-top:7px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;font-size:7.4pt;color:var(--muted)}
+  .foot .cta{font-family:Fraunces,serif;font-style:italic;font-weight:700;color:var(--ink);font-size:9.6pt}
+  .pgno{position:absolute;right:13mm;bottom:4mm;font-size:7pt;color:var(--muted);letter-spacing:1px;font-weight:700}
+</style>
+<style>/* Kaypoh V2 — edit content directly in the HTML. Fonts and photographs are embedded. */
+:root{--paper:#faf7f1;--red:#c9302a;--teal:#146b72;--gold:#d9a02b}
+html,body{background:#e8e3da}
+.page{padding:10mm 13mm 10mm;overflow:visible;margin:8mm auto;box-shadow:0 2px 20px #0002;height:297mm}
+.mast{padding-bottom:9px;border-bottom:2px solid var(--ink);margin-bottom:12px}
+.mast .name{font-size:37pt;line-height:.92}
+.mast .tag{font-size:9pt;margin-top:6px}
+.mast .meta{font-size:6.8pt;letter-spacing:1.1px;line-height:1.6}
+.hero{height:99mm;border-radius:2px}
+.hero .ov{background:linear-gradient(180deg,#0000 30%,#0005 48%,#000e 100%)}
+.hero .pin{border-radius:0;top:14px;left:16px;font-size:7pt;padding:5px 9px}
+.hero .txt{padding:16px 19px 18px}
+.hero .kick{font-size:7.4pt;color:#f0c460;letter-spacing:1.25px}
+.hero h3{font-size:30pt;line-height:1.02;max-width:580px;margin:6px 0 12px;letter-spacing:-.85px}
+.hero ul{grid-template-columns:1.28fr 1fr 1fr;gap:13px}
+.hero li{font-size:8pt;line-height:1.35;padding-left:0;border-left:1px solid #ffffff55;padding-left:9px}
+.hero li::before{display:none}
+.hero li b{display:block;margin-bottom:3px}
+.tldr{grid-template-columns:24mm 1fr 1.2fr 1.05fr;background:transparent;border:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);border-radius:0;margin:12px 0 0}
+.tldr .h{font-size:6.7pt;letter-spacing:1px;padding:10px 9px 10px 0;background:transparent;color:var(--ink)}
+.tldr .i{padding:8px 11px;font-size:7pt;line-height:1.3}
+.tldr .i b{font-size:6.5pt;letter-spacing:1.6px;color:var(--teal);margin-bottom:2px}
+.tldr .i strong{display:block;font-size:9pt;line-height:1.1;margin-bottom:3px;font-weight:800}
+.tldr .i span{display:block}
+.tldr .i small{display:block;font-size:6.9pt;font-weight:600;margin-top:2px}
+.two{grid-template-columns:1.15fr 1fr;gap:8mm;margin-top:6mm}
+.lab{gap:5px;margin-bottom:8px;align-items:baseline}
+.lab h2{font-size:18pt;line-height:1.05;letter-spacing:-.6px}
+.lab .k{font-size:6.2pt;letter-spacing:.8px;white-space:nowrap}
+.plan .lab,.tickets .lab{flex-wrap:wrap;gap:3px}
+.plan .lab .k,.tickets .lab .k{margin-left:0;flex-basis:100%}
+.cost{gap:9px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:7px 0;margin-bottom:7px}
+.cost div{padding:0;border-radius:0;background:transparent;color:var(--muted);font-size:6.6pt;line-height:1.3}
+.cost div b{font-size:17pt;margin-bottom:3px;color:var(--ink)}
+.cost div:first-child b,.cost div:nth-child(2) b{color:var(--gold-ink)}
+.tl li{border:0;padding:0 0 8px;gap:15px;position:relative}
+.tl li:before{content:'';position:absolute;left:46px;top:7px;bottom:-7px;width:1px;background:var(--teal)}
+.tl li:after{content:'';position:absolute;left:43px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--paper);border:2px solid var(--teal)}
+.tl li:last-child:before{display:none}
+.tl .tm{width:38px;font-size:8.1pt;padding-top:1px;letter-spacing:-.3px}
+.tl .w b{font-size:8.2pt;line-height:1.25;margin-bottom:2px}
+.tl .w span{font-size:7.4pt;line-height:1.32}
+.route-marker{display:inline-block;font-style:normal;font-size:5.9pt;font-weight:800;letter-spacing:.7px;color:var(--teal);margin-top:3px}
+.tl li:first-child .route-marker{color:var(--gold-ink)}
+.pre-drinks{font-size:6.9pt;line-height:1.3;color:var(--muted);margin-top:3px}
+.pre-drinks b{display:inline!important;font-size:6.9pt!important}
+.sun{margin-top:0;background:transparent;border-left:3px solid var(--red);padding:5px 8px;font-size:7.5pt;border-radius:0;line-height:1.35}
+.sun b{font-family:Fraunces,serif;font-size:10pt;color:var(--red)}
+.tile{height:32mm;border-radius:2px}
+.tile .t{padding:8px 10px}
+.tile .t b{font-size:9pt;line-height:1.25}
+.tile .t span{font-size:7.1pt;line-height:1.3}
+.tile .pin{font-size:5.7pt;top:7px;left:9px;border-radius:0;padding:3px 6px}
+.tk{margin-top:5px}
+.tk li{grid-template-columns:40px 1fr;gap:7px;padding:5px 0}
+.st{font-size:5.5pt;letter-spacing:.5px;border-radius:0;padding:3px 0}
+.tk .w b{font-size:7.7pt;line-height:1.28;margin-bottom:2px}
+.tk .w span{font-size:7.1pt;line-height:1.32}
+.pgno{bottom:5mm;font-size:6pt}
+.running{display:flex;justify-content:space-between;align-items:center;padding-bottom:5px;margin-bottom:12px;border-bottom:1px solid var(--ink);font-size:6pt;font-weight:700;letter-spacing:1px}
+.running>span:first-child{font-family:Fraunces,serif;letter-spacing:-.5px;font-size:13pt}.running b{color:var(--red)}
+.second>.lab:first-of-type h2{font-size:23pt}
+.eat{display:grid;grid-template-columns:1fr 2fr;gap:13px}
+.eat .c{border-radius:0;border:0;background:transparent}
+.eat .featured{border-right:1px solid var(--line);padding-right:13px}
+.eat .featured img{height:38mm;object-position:center}
+.eat .featured .b{padding:9px 0 0}
+.eat .featured .n{font-size:22pt;letter-spacing:-.8px}
+.eat .featured .pr{font-size:9pt;margin:4px 0 6px;color:var(--ink)}
+.pick{font-size:5.8pt;letter-spacing:1px;color:var(--red);font-weight:800;margin-bottom:5px}
+.eat .featured .ln{font-size:7.5pt;line-height:1.35;margin-top:5px}
+.eat .no{width:20px;height:20px;border-radius:0;top:0;left:0;font-size:8pt}
+.secondary{display:grid;grid-template-columns:1fr 1fr;gap:12px 13px}
+.secondary .c{display:grid;grid-template-columns:1fr;align-content:start}
+.secondary img{height:18mm}
+.eat .secondary .b{padding:6px 0 0}
+.eat .secondary .n{font-size:12pt}
+.eat .secondary .pr{font-size:7.6pt;color:var(--ink);margin:3px 0}
+.eat .secondary .ln{font-size:7pt;line-height:1.27;margin-top:2px}
+.tags{gap:5px;margin-bottom:4px}.tg{padding:0;background:transparent!important;border-radius:0;font-size:5.7pt;color:var(--muted);letter-spacing:.6px}
+.tg.bk{color:var(--teal)}.tg.vb{color:var(--muted)}.featured .tg.vb,.secondary .c:last-child .tg.vb{color:var(--gold-ink)}
+.strip{grid-template-columns:17mm 1fr 1fr;border-radius:0;background:#eee9df;margin-top:11px;font-size:7.1pt}
+.strip .h{font-size:6pt;padding:7px 9px;letter-spacing:1px}
+.strip .i{padding:7px 9px;line-height:1.3}
+.second>.lab{margin-top:5mm!important;margin-bottom:8px}
+.second>.running+.lab{margin-top:0!important}
+.pop{gap:12px}
+.pop .c{border:0;border-radius:0;background:transparent}
+.pop img{height:23mm;border-radius:0}
+.pop .pin{border-radius:0;font-size:5.7pt;left:0;top:0;padding:4px 7px}
+.pop .pin.gold{background:var(--gold-soft);color:var(--gold-ink)}
+.pop .b{padding:7px 0 0}
+.pop .n{font-size:12pt;margin-bottom:4px}
+.pop .ln{font-size:7.4pt;line-height:1.33}
+.more{gap:5mm;margin-top:11px;border-top:1px solid var(--line);padding-top:7px}
+.more .h{font-size:6pt;letter-spacing:.7px;margin-bottom:3px}
+.more>div:nth-child(2) .h{color:var(--red)}
+ul.b li{font-size:7pt;line-height:1.3;padding:2px 0 2px 8px}
+ul.b li::before{height:3px;width:3px;top:7px;background:var(--ink)}
+.strip.hy{grid-template-columns:11mm 1fr 11mm 1fr;font-size:7.2pt;margin-top:0;background:transparent;border-top:1px solid var(--red);border-bottom:1px solid var(--line)}
+.strip.hy .i{padding:7px 9px;border-left:0}.strip.hy .h{font-size:6pt;padding:7px 3px;background:transparent;color:var(--red);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:1.3px}
+.foot{bottom:9mm;left:13mm;right:13mm;display:grid;grid-template-columns:1fr auto;gap:7px 15px;border-top:2px solid var(--red);padding-top:9px;align-items:center}
+.foot .cta{font-size:14pt;line-height:1.12;font-style:normal;letter-spacing:-.2px}.foot .cta span{color:var(--red)}
+.share-stamp{font-size:9pt;line-height:1.1;font-weight:800;color:var(--red);letter-spacing:1px;border:1px solid var(--red);padding:8px 12px}
+.credits{grid-column:1/-1;font-size:5.5pt;line-height:1.3;color:var(--muted)}
+@media print{html,body{background:var(--paper)}.page{margin:0;box-shadow:none;overflow:hidden}}
+/* Stable print geometry across browser and paged-media renderers. */
+.lab h2{flex:0 0 auto;white-space:nowrap;width:max-content}
+.plan .lab h2,.tickets .lab h2{width:100%}
+.tl .w{flex:1;min-width:0}
+.secondary .c{display:block}
+.eat .c .no{display:block;text-align:center;line-height:20px}
+.foot{display:flex;flex-wrap:wrap;gap:7px 15px}
+.foot .cta{flex:1}.foot .credits{width:100%;flex:none}
+.hero h3{max-width:100%;width:100%}
+.tl li{padding-bottom:6px}
+.two{margin-top:5mm}
+.running{margin-bottom:8px}
+.secondary img{height:14mm}
+.second>.lab{margin-top:4mm!important}
+.second>.running+.lab{margin-top:0!important}
+.rank{display:inline-block;font-family:Inter,sans-serif;font-size:7pt;font-weight:800;vertical-align:middle;color:var(--red);margin-right:5px;letter-spacing:0}
+.featured .rank{font-size:9pt;margin-right:7px}
+.foot{bottom:7mm}
+.strip.hy .h{writing-mode:horizontal-tb;transform:none;color:var(--red)}
+.strip.hy .h.go{color:var(--teal)}
+a.hero,a.i{display:block}
+.tl .w a,.sun a,.strip a,ul.b a,.tk .w a{color:inherit}
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page one">
+  <div class="mast">
+    <div>
+      <div class="name">Kay<span>poh</span></div>
+      <div class="tag">Where to go, what to eat, what to book. Sorted lah.</div>
+    </div>
+    <div class="meta">Issue 002<br>Thu 17 Sep 2026<br>Covers Thu 17 – Wed 23 Sep</div>
+  </div>
+
+  <a class="hero" href="https://lightsbythelake.nparks.gov.sg">
+    <img src="https://lightsbythelake.nparks.gov.sg/images/Activities/Light%20Shows/17__Jeffrey_Loek.jpg" alt="Cloud Pagoda light show at Jurong Lake Gardens">
+    <div class="ov"></div>
+    <span class="pin">The One Thing · Free</span>
+    <div class="txt">
+      <div class="kick">Lights by the Lake opens · 19–27 Sep</div>
+      <h3>The lanterns are in the<br>west this year</h3>
+      <ul>
+        <li><b>Sat 19, from 6.30pm:</b> Rockestra on Ficus Lawn. Mandopop and English hits through the decades. Free, no ticket.</li>
+        <li><b>Nightly, 7.30–10pm:</b> Cloud Pagoda light show every 30 minutes. Last one at 10pm.</li>
+        <li><b>Nightly, 6.30–11pm:</b> food street at Lakeside Field. Chinese Garden MRT, 5 min.</li>
+
+      </ul>
+    </div>
+  </a><div class="tldr">
+    <div class="h">This week in 10 seconds</div>
+    <a class="i" href="https://lightsbythelake.nparks.gov.sg"><b>Go</b><strong>Lights by the Lake</strong><span>opens Saturday.</span><small>Free, 6.30–10.30pm, to 27 Sep.</small></a>
+    <a class="i" href="https://mukai.sg"><b>Eat</b><strong>MUKAI.</strong><span>Shibuya's kaisendon counter, first outlet outside Japan.</span><small>Plaza Singapura, daily.</small></a>
+    <a class="i" href="https://bookmyshow.sg/en/events/KCSG2026"><b>Book</b><strong>Kit Chan,</strong><span>Atrium Live, Sat 19 Sep.</span><small>Indoor Stadium, from $128.</small></a>
+  </div>
+
+  
+
+  <div class="two"><div class="plan">
+      <div class="lab"><h2>The Weekend Plan</h2><span class="k">Saturday</span></div>
+      <div class="cost">
+        <div><b>$70</b>market, dinner, drinks</div>
+        <div><b>$25</b>door ticket and food street</div>
+        <div><b>12.30–11pm</b>one MRT hop, rest on foot</div>
+      </div>
+      <ul class="tl">
+        <li><div class="tm">12.30pm</div><div class="w"><a href="https://www.common-rare.com"><b>Common Rare opens, Suntec Halls 401–402</b></a><span>Two hundred indie brands, over half from overseas. Bring cash.</span><em class="route-marker">$9 · ESPLANADE EXIT A</em></div></li>
+        <li><div class="tm">2.30pm</div><div class="w"><a href="https://designsingapore.org/events/prototype-island-homecoming/"><b>Prototype Island, ArtScience Museum B2</b></a><span>Fifteen Singapore design projects, back from Milan. Closes Sunday.</span><em class="route-marker">FREE · 15 MIN WALK</em></div></li>
+        <li><div class="tm">6.30pm</div><div class="w"><a href="https://lightsbythelake.nparks.gov.sg/lantern-displays/"><b>Lights by the Lake, opening night</b></a><span>Thirty minutes from City Hall. White Snake lanterns at Lakeside Field.</span><em class="route-marker">ONE MRT HOP · FREE</em></div></li>
+        <li><div class="tm">8pm</div><div class="w"><a href="https://lightsbythelake.nparks.gov.sg/rockestra/"><b>Rockestra, Ficus Lawn</b></a><span>Free. Then the 10pm pagoda show and the food street.</span><em class="route-marker">ON FOOT</em></div></li>
+      </ul>
+      <div class="sun"><b>Sunday, low effort</b>Brunch at <a href="https://www.instagram.com/tokyobrewlab">Tokyo Brew Lab</a>, Beach Road, from 9.30am. Then <a href="https://www.esplanade.com/whats-on/2026/belle-and-sebastian-if-youre-feeling-sinister-favourites">Belle and Sebastian</a> at the Esplanade, 7.30pm, from $98.</div>
+    </div>
+    <div class="tickets">
+      <div class="lab"><h2>Ticket Alarm</h2><span class="k">As of Wed night</span></div>
+      <a href="https://singaporegp.sg/tickets" class="tile">
+        <img src="https://storage.singaporegp.sg//web/2026/social-share/202605-social-share.jpg" alt="F1 Singapore Grand Prix">
+        <div class="ov"></div>
+        <span class="pin">Buy this week</span>
+        <div class="t"><b>F1 Singapore GP · 9–11 Oct</b><span>Singapore's first Sprint weekend. Zone 4 Walkabout covers the Padang stage.</span><span>JJ Lin Fri, The Killers Sat, Lana Del Rey Sun. Janet Jackson is Zone 1 only.</span></div>
+      </a>
+      <ul class="tk">
+        <li><span class="st wk">Sat 19</span><div class="w"><a href="https://bookmyshow.sg/en/events/KCSG2026"><b>Kit Chan, Atrium Live · Indoor Stadium</b></a><span>First solo concert in three years. 8pm, $128–288, BookMyShow.</span></div></li>
+        <li><span class="st wk">Sun 20</span><div class="w"><a href="https://www.esplanade.com/whats-on/2026/belle-and-sebastian-if-youre-feeling-sinister-favourites"><b>Belle and Sebastian · Esplanade Concert Hall</b></a><span>'If You're Feeling Sinister' in full, 30 years on. 7.30pm, from $98.</span></div></li>
+        <li><span class="st pp">Moved</span><div class="w"><a href="https://www.sistic.com.sg/events/ash0926"><b>Ash · Mon 21 Sep, Foo Chow Hall</b></a><span>The 1977 anniversary tour. Not Hard Rock Cafe any more. From $158, SISTIC.</span></div></li>
+        <li><span class="st wk">Tue 22</span><div class="w"><a href="https://www.sistic.com.sg/events/all0926"><b>All-4-One · Resorts World Ballroom</b></a><span>8pm, one night only. $88–228, SISTIC.</span></div></li>
+        <li><span class="st on">On sale</span><div class="w"><a href="https://www.livenation.sg/bruno-mars-tickets-adp147754"><b>Bruno Mars · 13–18 Apr 2027, National Stadium</b></a><span>Four nights. General sale opened Monday, Ticketmaster.</span></div></li>
+        <li><span class="st re">Refunds</span><div class="w"><a href="https://ticketmaster.sg/activity/detail/26sg_postmalone"><b>Post Malone · 25 Sep still postponed</b></a><span>No new date. Refunds are automatic. The Weeknd 2–3 Oct still has seats.</span></div></li>
+      </ul>
+    </div>
+
+    
+  </div>
+  <div class="pgno">01</div>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page second"><div class="running"><span>Kay<b>poh</b></span><span>ISSUE 002 / THU 17 SEP 2026</span></div>
+  <div class="lab"><h2>Eat This Week</h2><span class="k">Five picks · prices per person</span></div>
+  <div class="eat">
+    <a class="c featured" href="https://mukai.sg"><img src="https://mukai.sg/wp-content/themes/mukai-theme/assets/img/kaiho-tokujo.jpg" alt="MUKAI Kaiho Don seafood bowl"><div class="b"><div class="pick">KAYPOH SAYS / THE FIRST PICK</div><div class="n"><div class="rank">1</div>MUKAI</div><div class="pr">$28.90++ Nami · $79.90++ Goku Goku</div><div class="tags"><span class="tg bk">Book</span><span class="tg vb">Counter</span></div><div class="ln"><b>Order:</b> Kaiho Don Nami, then the dashi pour-over on what's left.</div><div class="ln verdict"><b>Why:</b> Shibuya's kaisendon counter, first outlet outside Japan. Goku Goku, 30 a day.</div><div class="ln"><b>Go:</b> Plaza Singapura #B1-07 · Dhoby Ghaut · 11.30am–3pm, 5.30–10pm.</div></div></a>
+    
+    
+    
+    
+  <div class="secondary"><a class="c" href="https://www.raffles.com/singapore/dining/1887-by-andre/"><img src="https://www.raffles.com/content/dam/remote/brands/raf/hotels/asia-and-middle-east/sg/singapore/a5e1/26032_acf_467.jpg" alt="Plated dish at 1887 by André"><div class="b"><div class="n"><div class="rank">2</div>1887 by André</div><div class="pr">from $198++</div><div class="tags"><span class="tg bk">Book</span><span class="tg vb">Date night</span></div><div class="ln"><b>Order:</b> four courses, your pick. Bouillabaisse first.</div><div class="ln"><b>Why:</b> Two Michelin stars and Opening of the Year, on debut.</div><div class="ln"><b>Go:</b> Raffles Hotel lobby · 1 Beach Road.</div></div></a><a class="c" href="https://www.instagram.com/osteriamozzasingapore"><img src="https://hungrygowhere.com/wp-content/uploads/2026/09/06-sy-osteria-mozza-hgw.jpg" alt="Chicken parmigiana piadina at Osteria Mozza"><div class="b"><div class="n"><div class="rank">3</div>Osteria Mozza</div><div class="pr">$26–38</div><div class="tags"><span class="tg bk">Book</span><span class="tg vb">Group</span></div><div class="ln"><b>Order:</b> pizza alla pala, $28. Mafaldine, $26.</div><div class="ln"><b>Why:</b> Nancy Silverton's only kitchen in Asia, reopened 7 Sep.</div><div class="ln"><b>Go:</b> ION Orchard #03-14B · Orchard MRT.</div></div></a><a class="c" href="https://www.instagram.com/sansok.sg"><img src="https://hungrygowhere.com/wp-content/uploads/2026/09/02-ll-sansok-HGW.jpg" alt="Chef with a han-sang tray at Sansok"><div class="b"><div class="n"><div class="rank">4</div>Sansok</div><div class="pr">sets from $12.90</div><div class="tags"><span class="tg">Walk-in</span><span class="tg vb">Value</span></div><div class="ln"><b>Order:</b> charcoal-grilled set, then milky bingsu.</div><div class="ln"><b>Why:</b> Yohan Min of Culinary Class Wars, cooking han-sang in Hougang.</div><div class="ln"><b>Go:</b> Hougang Mall #03-09A · Hougang MRT.</div></div></a><a class="c" href="https://www.tiantianchickenrice.com.sg"><img src="https://eatbook.sg/wp-content/uploads/2026/08/tian-tian-jewel-platter.jpg" alt="Tian Tian heritage platter"><div class="b"><div class="n"><div class="rank">5</div>Tian Tian, Jewel</div><div class="pr">$11++ set</div><div class="tags"><span class="tg">Walk-in</span><span class="tg vb">Air-con</span></div><div class="ln"><b>Order:</b> steamed set, then the chicken curry.</div><div class="ln"><b>Why:</b> The 1986 Maxwell stall's first sit-down room.</div><div class="ln"><b>Go:</b> Jewel #B2-243 · Changi Airport MRT.</div></div></a></div></div>
+  <div class="strip">
+    <div class="h">Drink</div>
+    <div class="i"><a href="https://greatnanyang.com.sg"><b>Great Nanyang After Dark, Craig Road</b></a>Half-pint Tiger $4.90, spiked pandan milkshake $12.80. Daily 5.30–10pm.</div>
+    <div class="i"><a href="https://www.instagram.com/kiapkiap.sg"><b>Kiap Kiap Chicken Club &amp; Bar, Liang Seah Street</b></a>Fried chicken and $20 cocktails till 2am Fri and Sat.</div>
+  </div>
+  <div class="strip" style="margin-top:6px">
+    <div class="h">Coffee</div>
+    <div class="i"><a href="https://www.instagram.com/bouche.sg"><b>Bouche, Holland Drive</b></a>Matcha under an HDB block. Earth Day $9.90, cold brew $3.90. Closed Wed.</div>
+    <div class="i"><a href="https://www.instagram.com/tokyobrewlab"><b>Tokyo Brew Lab, Beach Road</b></a>City-pop counter. Egg sando $7, hand drip from $9. Weekends from 9.30am.</div>
+  </div>
+
+  <div class="lab" style="margin-top:6mm"><h2>Pop-ups &amp; Drops</h2><span class="k">This week and next</span></div>
+  <div class="pop">
+    <a class="c" href="https://www.common-rare.com"><img src="https://images.squarespace-cdn.com/content/v1/56609546e4b0e8b8f0c13fc0/36056ddc-9791-43d2-acf5-a82e841b923e/1F9A8902.jpg?format=1500w" alt="Common Rare market at night"><span class="pin">Opens Friday</span><div class="b"><div class="n">Common Rare</div><div class="ln"><b>What:</b> Shanghai's indie market lands here. Two hundred fashion and homeware brands.</div><div class="ln"><b>Go:</b> Suntec Halls 401–402 · 18–20 Sep · 12.30–9pm · $7 Fri, $9 weekend at the door.</div></div></a>
+    <a class="c" href="https://www.rwsentosa.com/en/play/universal-studios-singapore/halloween-horror-nights-14"><img src="https://www.rwsentosa.com/-/jssmedia/project/articles/events/hhn14/karang-guni---no-logo.png?mw=1200" alt="Karang Guni haunted house set"><span class="pin gold">Buy early</span><div class="b"><div class="n">Halloween Horror Nights 14</div><div class="ln"><b>What:</b> Four haunted houses, two scare zones. The Karang Guni Man is the icon.</div><div class="ln"><b>Go:</b> Universal Studios · 18 nights from 25 Sep · $68 non-peak, $78 peak.</div></div></a>
+    <a class="c" href="https://www.laupasat.sg/events/erdinger-oktoberfest"><img src="https://www.laupasat.sg/wp-content/uploads/2024/04/Lim-Yaohui_eFile299-768x512.jpg" alt="Lau Pa Sat interior"><span class="pin ink">Fri &amp; Sat, free</span><div class="b"><div class="n">Erdinger Oktoberfest</div><div class="ln"><b>What:</b> The hawker hall turns beer tent. Brass band, stein-holding, 50 free pints a night.</div><div class="ln"><b>Go:</b> Lau Pa Sat · 18, 19, 25, 26 Sep · 6–10pm · free · Raffles Place.</div></div></a>
+  </div>
+  <div class="more">
+    <div><span class="h">Also on</span>
+      <ul class="b">
+        <li><a href="https://singaporeccc.org.sg/events/singapore-tv-from-local-to-global-special-exhibition"><b>Not the Merlion:</b></a> Channel 8 drama costumes, free. SCCC Level 6.</li>
+        <li><a href="https://vampproductions.org/goodtimesatsouthbeachsg"><b>Good Times Festival</b></a> · JW Marriott South Beach · from Mon 21, 5.30–10.30pm · free.</li>
+      </ul>
+    </div>
+    <div><span class="h">Last call · ends Sun 20</span>
+      <ul class="b">
+        <li><a href="https://www.srf.sg"><b>Singapore River Festival</b></a> · last nights, three quays · free.</li>
+        <li><a href="https://designsingapore.org/events/prototype-island-homecoming/"><b>Prototype Island</b></a> · ArtScience Museum B2 · free.</li>
+      </ul>
+    </div>
+    <div><span class="h">Next week</span>
+      <ul class="b">
+        <li><a href="https://lightsbythelake.nparks.gov.sg"><b>Mid-Autumn day, Fri 25 Sep.</b></a> Jurong and the Gardens run to Sun 27.</li>
+        <li><a href="https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/lilytopia-2026.html"><b>Lilytopia closes Sun 27</b></a> · Flower Dome · ancient Egypt in lilies.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="lab" style="margin-top:6mm"><h2>Hype Check</h2><span class="k">Kaypoh says · Worth the queue?</span></div>
+  <div class="strip hy verdict-panel">
+    <div class="h go">Go</div>
+    <div class="i"><a href="https://www.common-rare.com"><b>Common Rare, Suntec Halls 401–402</b></a>Two hundred brands, three days, $7 on Friday. Go Friday night: Saturday afternoon is a crush.</div>
+    <div class="h skip">Skip</div>
+    <div class="i"><a href="https://www.fareastmalls.com.sg/en/clarke-quay-central/happenings/happenings-details?eventName=Matcha+Central+2026"><b>Matcha Central, Clarke Quay Central</b></a>A mall atrium and a spend-to-redeem queue. Bouche pours better, any weekday.</div>
+  </div>
+
+  <div class="foot">
+    <div class="cta">Forward this to the friend<br>who always says <span>"anything lah."</span></div>
+    <div class="share-stamp">PASS IT<br>ON ↗</div><div class="credits">Every name is a link to the official page. Photos: NParks / Jeffrey Leok, Singapore GP, MUKAI, Raffles Hotel Singapore, Common Rare, Resorts World Sentosa, Lau Pa Sat, HungryGoWhere, Eatbook.</div>
+  </div>
+  <div class="pgno">02</div>
+</div>
+
+
+
+
+<!-- Fit guard (10 Sep 2026, v2: page 1 too). Both pages are a fixed 297mm with an absolutely positioned footer,
+     so any overflow prints on top of the footer (issue 001 r3, page 2). After fonts load, every
+     block above the footer is zoomed down together, 1% at a time (floor 88%), until it clears the
+     footer. data-fit on each .page is read by render.sh, which warns the editor to cut a line. -->
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.page').forEach(function(page){
+      // page 2 has a pinned footer; page 1 has none, so its limit is the page's own bottom padding
+      var foot=page.querySelector('.foot');
+      var kids=Array.prototype.filter.call(page.children,function(e){
+        return !e.classList.contains('foot')&&!e.classList.contains('pgno')});
+      if(!kids.length) return;
+      var gap=8, z=1;
+      function limit(){
+        if(foot) return foot.getBoundingClientRect().top-gap;
+        var pad=parseFloat(getComputedStyle(page).paddingBottom)||0;
+        return page.getBoundingClientRect().bottom-pad-gap;
+      }
+      function over(){
+        var b=0; kids.forEach(function(k){b=Math.max(b,k.getBoundingClientRect().bottom)});
+        return b-limit();
+      }
+      while(over()>0 && z>0.88){
+        z=Math.round((z-0.01)*100)/100;
+        kids.forEach(function(k){k.style.zoom=z});
+      }
+      page.setAttribute('data-fit', z.toFixed(2));
+      if(over()>0) page.setAttribute('data-overflow', String(Math.round(over())));
+    });
+    document.documentElement.setAttribute('data-fit-done','1');
+  }
+  function go(){ (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit,fit); }
+  if(document.readyState==='complete') go(); else window.addEventListener('load',go);
+})();
+</script>
+</body></html>
