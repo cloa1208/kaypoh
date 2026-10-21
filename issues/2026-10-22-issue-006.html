@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<title>Kaypoh · Issue 006</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --ink:#17150f; --ink-2:#3f3b33; --muted:#6d675d; --line:#e4ded3;
+    --paper:#faf7f1; --card:#ffffff;
+    --red:#c9302a; --red-soft:#fbe6e3;
+    --gold:#d9a02b; --gold-soft:#fbefd2; --gold-ink:#6b4c00;
+    --teal:#146b72; --teal-soft:#dfeeef;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:Inter,-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:10pt;line-height:1.42;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:inherit;text-decoration:none}
+  .page{width:210mm;height:297mm;padding:11mm 13mm 10mm;overflow:hidden;position:relative;background:var(--paper)}
+  .page.one{page-break-after:always}
+  h1,h2,h3,h4,p,ul{margin:0}
+  b{font-weight:700}
+  .F{font-family:Fraunces,"Georgia",serif;font-weight:900}
+
+  /* masthead */
+  .mast{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:7px;border-bottom:3px solid var(--ink)}
+  .mast .name{font-family:Fraunces,"Georgia",serif;font-weight:900;font-size:34pt;letter-spacing:-1.5px;line-height:.95}
+  .mast .name span{color:var(--red)}
+  .mast .tag{font-family:Fraunces,"Georgia",serif;font-style:italic;font-weight:700;color:var(--ink-2);font-size:10.5pt;margin-top:6px}
+  .mast .meta{text-align:right;font-size:7.6pt;color:var(--muted);text-transform:uppercase;letter-spacing:1.3px;line-height:1.7;font-weight:600}
+
+  /* tldr */
+  .tldr{display:grid;grid-template-columns:34mm 1fr 1fr 1fr;margin:9px 0 10px;border:1px solid var(--line);background:var(--card);border-radius:10px;overflow:hidden}
+  .tldr .h{background:var(--ink);color:#fff;font-weight:800;font-size:7.6pt;letter-spacing:1.4px;text-transform:uppercase;padding:10px 12px;display:flex;align-items:center;line-height:1.2}
+  .tldr .i{padding:9px 12px;border-left:1px solid var(--line);font-size:9.2pt;line-height:1.35}
+  .tldr .i b{display:block;font-size:7.2pt;letter-spacing:1.4px;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+
+  /* section label */
+  .lab{display:flex;align-items:baseline;gap:8px;margin:0 0 8px}
+  .lab h2{font-family:Fraunces,"Georgia",serif;font-weight:900;font-size:15.5pt;letter-spacing:-.4px}
+  .lab .k{margin-left:auto;font-size:7.4pt;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+
+  /* hero */
+  .hero{position:relative;height:88mm;border-radius:12px;overflow:hidden;background:#000}
+  .hero img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 28%,rgba(0,0,0,.62) 58%,rgba(0,0,0,.9) 100%)}
+  .hero .txt{position:absolute;left:0;right:0;bottom:0;padding:14px 18px 15px;color:#fff}
+  .hero .kick{font-size:7.6pt;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);font-weight:800}
+  .hero h3{font-family:Fraunces,"Georgia",serif;font-weight:900;font-size:24pt;letter-spacing:-.6px;line-height:1.02;margin:4px 0 9px}
+  .hero ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+  .hero li{font-size:9pt;color:#f1ece3;padding-left:11px;position:relative;line-height:1.32}
+  .hero li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .hero li b{color:#fff}
+  .pin{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:7.2pt;letter-spacing:1.3px;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+  .pin.gold{background:var(--gold);color:#fff}
+  .pin.ink{background:var(--ink);color:#fff}
+  .hero .pin{position:absolute;top:11px;left:13px}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin-top:7mm}
+
+  /* tickets */
+  .tile{position:relative;border-radius:10px;overflow:hidden;height:34mm;background:#000;display:block}
+  .tile img{width:100%;height:100%;object-fit:cover;object-position:center 4%;display:block;transform:scale(2.6);transform-origin:50% 0}
+  .tile .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.6) 40%,rgba(0,0,0,.93) 100%)}
+  .tile .t{position:absolute;left:0;right:0;bottom:0;padding:9px 11px;color:#fff}
+  .tile .t b{font-size:11pt;display:block;margin-bottom:2px}
+  .tile .t span{font-size:8.4pt;color:#eee;display:block;line-height:1.3}
+  .tile .pin{position:absolute;top:8px;left:9px}
+  .tk{list-style:none;margin:8px 0 0;padding:0}
+  .tk li{display:grid;grid-template-columns:50px 1fr;gap:9px;align-items:start;padding:6px 0;border-top:1px solid var(--line)}
+  .tk li:first-child{border-top:0}
+  .st{font-size:6.6pt;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:4px;padding:3px 0;text-align:center;margin-top:2px}
+  .st.on{background:var(--teal-soft);color:var(--teal)} .st.re{background:var(--gold-soft);color:var(--gold-ink)} .st.pp{background:var(--red-soft);color:var(--red)} .st.wk{background:var(--ink);color:#fff}
+  .tk .w b{display:block;font-size:9.2pt}
+  .tk .w span{color:var(--ink-2);font-size:8.4pt;display:block}
+  .also{margin-top:8px;font-size:8.2pt;color:var(--ink-2);line-height:1.5;padding-top:6px;border-top:1px solid var(--line)}
+  .also b{color:var(--ink)}
+
+  /* plan */
+  .cost{display:flex;gap:6px;margin:0 0 8px}
+  .cost div{flex:1;background:var(--teal-soft);border-radius:8px;padding:7px 9px;font-size:7.8pt;color:var(--teal);line-height:1.25;font-weight:600}
+  .cost div b{display:block;font-family:Fraunces,serif;font-weight:900;font-size:14pt;color:var(--ink);margin-bottom:1px}
+  .tl{list-style:none;margin:0;padding:0}
+  .tl li{display:flex;gap:9px;padding:6px 0;border-top:1px solid var(--line)}
+  .tl li:first-child{border-top:0}
+  .tl .tm{flex:none;width:44px;font-weight:800;color:var(--teal);font-size:9.4pt}
+  .tl .w b{display:block;font-size:9.4pt}
+  .tl .w span{font-size:8.5pt;color:var(--ink-2);display:block}
+  .sun{margin-top:8px;background:#f0ebe2;border-radius:8px;padding:8px 11px;font-size:8.5pt;line-height:1.4}
+  .sun b{display:block;margin-bottom:1px}
+
+  /* eat */
+  .eat{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .eat .c{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;display:block}
+  .eat img{width:100%;height:25mm;object-fit:cover;display:block}
+  .eat .no{position:absolute;top:6px;left:6px;width:19px;height:19px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:8.4pt;display:flex;align-items:center;justify-content:center}
+  .eat .b{padding:8px 9px 9px}
+  .eat .n{font-family:Fraunces,serif;font-weight:900;font-size:10.6pt;line-height:1.1;letter-spacing:-.2px}
+  .eat .pr{font-weight:800;color:var(--red);font-size:8.4pt;margin:3px 0 5px}
+  .tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+  .tg{font-size:6.6pt;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:#efe9de;color:#4a4438}
+  .tg.bk{background:var(--teal-soft);color:var(--teal)} .tg.vb{background:var(--gold-soft);color:var(--gold-ink)}
+  .eat .ln{font-size:7.8pt;line-height:1.3;color:var(--ink-2);margin-top:2px}
+  .eat .ln b{color:var(--ink)}
+  .strip{display:grid;grid-template-columns:24mm 1fr 1fr;margin-top:6px;background:#f0ebe2;border-radius:8px;overflow:hidden;font-size:8.3pt}
+  .strip.hy{grid-template-columns:16mm 1fr 16mm 1fr}
+  .strip .h{padding:8px 10px;font-weight:800;font-size:7.2pt;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center}
+  .strip .i{padding:5px 11px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #ddd6c8;line-height:1.35}
+  .strip .i b{display:block}
+  .strip .h.go{color:var(--teal);background:var(--teal-soft);justify-content:center}
+  .strip .h.skip{color:var(--red);background:var(--red-soft);justify-content:center}
+
+  /* pop */
+  .pop{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+  .pop .c{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;display:block}
+  .pop img{width:100%;height:26mm;object-fit:cover;display:block}
+  .pop .c:first-child img{object-position:8% 50%}
+  .pop .c:nth-child(3) img{object-position:50% 72%}
+  .pop .pin{position:absolute;top:8px;left:8px}
+  .pop .b{padding:8px 10px 9px}
+  .pop .n{font-family:Fraunces,serif;font-weight:900;font-size:10.8pt;line-height:1.1;letter-spacing:-.2px;margin-bottom:4px}
+  .pop .ln{font-size:8pt;color:var(--ink-2);line-height:1.32}
+  .pop .ln b{color:var(--ink)}
+  .more{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:7px}
+  .more .h{font-size:7.2pt;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);font-weight:800;display:block;margin-bottom:4px}
+  ul.b{list-style:none;padding:0}
+  ul.b li{font-size:8.3pt;color:var(--ink-2);padding:3px 0 3px 11px;position:relative;line-height:1.32}
+  ul.b li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--red)}
+  ul.b li b{color:var(--ink)}
+
+  /* hype */
+  .hype{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .hype .c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:8.6pt;line-height:1.4}
+  .hype .n{font-family:Fraunces,serif;font-weight:900;font-size:10.6pt;margin-bottom:3px}
+  .hype .l{font-size:6.8pt;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .hype .v{font-weight:700}
+  .hype .v.go{color:var(--teal)} .hype .v.skip{color:var(--red)}
+
+  .foot{position:absolute;left:13mm;right:13mm;bottom:7mm;padding-top:7px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;font-size:7.4pt;color:var(--muted)}
+  .foot .cta{font-family:Fraunces,serif;font-style:italic;font-weight:700;color:var(--ink);font-size:9.6pt}
+  .pgno{position:absolute;right:13mm;bottom:4mm;font-size:7pt;color:var(--muted);letter-spacing:1px;font-weight:700}
+</style>
+<style>/* Kaypoh V2 — edit content directly in the HTML. Fonts and photographs are embedded. */
+:root{--paper:#faf7f1;--red:#c9302a;--teal:#146b72;--gold:#d9a02b}
+html,body{background:#e8e3da}
+.page{padding:10mm 13mm 10mm;overflow:visible;margin:8mm auto;box-shadow:0 2px 20px #0002;height:297mm}
+.mast{padding-bottom:9px;border-bottom:2px solid var(--ink);margin-bottom:12px}
+.mast .name{font-size:37pt;line-height:.92}
+.mast .tag{font-size:9pt;margin-top:6px}
+.mast .meta{font-size:6.8pt;letter-spacing:1.1px;line-height:1.6}
+.hero{height:99mm;border-radius:2px}
+.hero .ov{background:linear-gradient(180deg,#0000 30%,#0005 48%,#000e 100%)}
+.hero .pin{border-radius:0;top:14px;left:16px;font-size:7pt;padding:5px 9px}
+.hero .txt{padding:16px 19px 18px}
+.hero .kick{font-size:7.4pt;color:#f0c460;letter-spacing:1.25px}
+.hero h3{font-size:30pt;line-height:1.02;max-width:580px;margin:6px 0 12px;letter-spacing:-.85px}
+.hero ul{grid-template-columns:1.28fr 1fr 1fr;gap:13px}
+.hero li{font-size:8pt;line-height:1.35;padding-left:0;border-left:1px solid #ffffff55;padding-left:9px}
+.hero li::before{display:none}
+.hero li b{display:block;margin-bottom:3px}
+.tldr{grid-template-columns:24mm 1fr 1.2fr 1.05fr;background:transparent;border:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);border-radius:0;margin:12px 0 0}
+.tldr .h{font-size:6.7pt;letter-spacing:1px;padding:10px 9px 10px 0;background:transparent;color:var(--ink)}
+.tldr .i{padding:8px 11px;font-size:7pt;line-height:1.3}
+.tldr .i b{font-size:6.5pt;letter-spacing:1.6px;color:var(--teal);margin-bottom:2px}
+.tldr .i strong{display:block;font-size:9pt;line-height:1.1;margin-bottom:3px;font-weight:800}
+.tldr .i span{display:block}
+.tldr .i small{display:block;font-size:6.9pt;font-weight:600;margin-top:2px}
+.two{grid-template-columns:1.15fr 1fr;gap:8mm;margin-top:6mm}
+.lab{gap:5px;margin-bottom:8px;align-items:baseline}
+.lab h2{font-size:18pt;line-height:1.05;letter-spacing:-.6px}
+.lab .k{font-size:6.2pt;letter-spacing:.8px;white-space:nowrap}
+.plan .lab,.tickets .lab{flex-wrap:wrap;gap:3px}
+.plan .lab .k,.tickets .lab .k{margin-left:0;flex-basis:100%}
+.cost{gap:9px;border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:7px 0;margin-bottom:7px}
+.cost div{padding:0;border-radius:0;background:transparent;color:var(--muted);font-size:6.6pt;line-height:1.3}
+.cost div b{font-size:17pt;margin-bottom:3px;color:var(--ink)}
+.cost div:first-child b,.cost div:nth-child(2) b{color:var(--gold-ink)}
+.tl li{border:0;padding:0 0 8px;gap:15px;position:relative}
+.tl li:before{content:'';position:absolute;left:46px;top:7px;bottom:-7px;width:1px;background:var(--teal)}
+.tl li:after{content:'';position:absolute;left:43px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--paper);border:2px solid var(--teal)}
+.tl li:last-child:before{display:none}
+.tl .tm{width:38px;font-size:8.1pt;padding-top:1px;letter-spacing:-.3px}
+.tl .w b{font-size:8.2pt;line-height:1.25;margin-bottom:2px}
+.tl .w span{font-size:7.4pt;line-height:1.32}
+.route-marker{display:inline-block;font-style:normal;font-size:5.9pt;font-weight:800;letter-spacing:.7px;color:var(--teal);margin-top:3px}
+.tl li:first-child .route-marker{color:var(--gold-ink)}
+.pre-drinks{font-size:6.9pt;line-height:1.3;color:var(--muted);margin-top:3px}
+.pre-drinks b{display:inline!important;font-size:6.9pt!important}
+.sun{margin-top:0;background:transparent;border-left:3px solid var(--red);padding:5px 8px;font-size:7.5pt;border-radius:0;line-height:1.35}
+.sun b{font-family:Fraunces,serif;font-size:10pt;color:var(--red)}
+.tile{height:32mm;border-radius:2px}
+.tile .t{padding:8px 10px}
+.tile .t b{font-size:9pt;line-height:1.25}
+.tile .t span{font-size:7.1pt;line-height:1.3}
+.tile .pin{font-size:5.7pt;top:7px;left:9px;border-radius:0;padding:3px 6px}
+.tk{margin-top:5px}
+.tk li{grid-template-columns:40px 1fr;gap:7px;padding:5px 0}
+.st{font-size:5.5pt;letter-spacing:.5px;border-radius:0;padding:3px 0}
+.tk .w b{font-size:7.7pt;line-height:1.28;margin-bottom:2px}
+.tk .w span{font-size:7.1pt;line-height:1.32}
+.pgno{bottom:5mm;font-size:6pt}
+.running{display:flex;justify-content:space-between;align-items:center;padding-bottom:5px;margin-bottom:12px;border-bottom:1px solid var(--ink);font-size:6pt;font-weight:700;letter-spacing:1px}
+.running>span:first-child{font-family:Fraunces,serif;letter-spacing:-.5px;font-size:13pt}.running b{color:var(--red)}
+.second>.lab:first-of-type h2{font-size:23pt}
+.eat{display:grid;grid-template-columns:1fr 2fr;gap:13px}
+.eat .c{border-radius:0;border:0;background:transparent}
+.eat .featured{border-right:1px solid var(--line);padding-right:13px}
+.eat .featured img{height:38mm;object-position:center}
+.eat .featured .b{padding:9px 0 0}
+.eat .featured .n{font-size:22pt;letter-spacing:-.8px}
+.eat .featured .pr{font-size:9pt;margin:4px 0 6px;color:var(--ink)}
+.pick{font-size:5.8pt;letter-spacing:1px;color:var(--red);font-weight:800;margin-bottom:5px}
+.eat .featured .ln{font-size:7.5pt;line-height:1.35;margin-top:5px}
+.eat .no{width:20px;height:20px;border-radius:0;top:0;left:0;font-size:8pt}
+.secondary{display:grid;grid-template-columns:1fr 1fr;gap:12px 13px}
+.secondary .c{display:grid;grid-template-columns:1fr;align-content:start}
+.secondary img{height:18mm}
+.eat .secondary .b{padding:6px 0 0}
+.eat .secondary .n{font-size:12pt}
+.eat .secondary .pr{font-size:7.6pt;color:var(--ink);margin:3px 0}
+.eat .secondary .ln{font-size:7pt;line-height:1.27;margin-top:2px}
+.tags{gap:5px;margin-bottom:4px}.tg{padding:0;background:transparent!important;border-radius:0;font-size:5.7pt;color:var(--muted);letter-spacing:.6px}
+.tg.bk{color:var(--teal)}.tg.vb{color:var(--muted)}.featured .tg.vb,.secondary .c:last-child .tg.vb{color:var(--gold-ink)}
+.strip{grid-template-columns:17mm 1fr 1fr;border-radius:0;background:#eee9df;margin-top:11px;font-size:7.1pt}
+.strip .h{font-size:6pt;padding:7px 9px;letter-spacing:1px}
+.strip .i{padding:7px 9px;line-height:1.3}
+.second>.lab{margin-top:5mm!important;margin-bottom:8px}
+.second>.running+.lab{margin-top:0!important}
+.pop{gap:12px}
+.pop .c{border:0;border-radius:0;background:transparent}
+.pop img{height:23mm;border-radius:0}
+.pop .pin{border-radius:0;font-size:5.7pt;left:0;top:0;padding:4px 7px}
+.pop .pin.gold{background:var(--gold-soft);color:var(--gold-ink)}
+.pop .b{padding:7px 0 0}
+.pop .n{font-size:12pt;margin-bottom:4px}
+.pop .ln{font-size:7.4pt;line-height:1.33}
+.more{gap:5mm;margin-top:11px;border-top:1px solid var(--line);padding-top:7px}
+.more .h{font-size:6pt;letter-spacing:.7px;margin-bottom:3px}
+.more>div:nth-child(2) .h{color:var(--red)}
+ul.b li{font-size:7pt;line-height:1.3;padding:2px 0 2px 8px}
+ul.b li::before{height:3px;width:3px;top:7px;background:var(--ink)}
+.strip.hy{grid-template-columns:11mm 1fr 11mm 1fr;font-size:7.2pt;margin-top:0;background:transparent;border-top:1px solid var(--red);border-bottom:1px solid var(--line)}
+.strip.hy .i{padding:7px 9px;border-left:0}.strip.hy .h{font-size:6pt;padding:7px 3px;background:transparent;color:var(--red);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:1.3px}
+.foot{bottom:9mm;left:13mm;right:13mm;display:grid;grid-template-columns:1fr auto;gap:7px 15px;border-top:2px solid var(--red);padding-top:9px;align-items:center}
+.foot .cta{font-size:14pt;line-height:1.12;font-style:normal;letter-spacing:-.2px}.foot .cta span{color:var(--red)}
+.share-stamp{font-size:9pt;line-height:1.1;font-weight:800;color:var(--red);letter-spacing:1px;border:1px solid var(--red);padding:8px 12px}
+.credits{grid-column:1/-1;font-size:5.5pt;line-height:1.3;color:var(--muted)}
+@media print{html,body{background:var(--paper)}.page{margin:0;box-shadow:none;overflow:hidden}}
+/* Stable print geometry across browser and paged-media renderers. */
+.lab h2{flex:0 0 auto;white-space:nowrap;width:max-content}
+.plan .lab h2,.tickets .lab h2{width:100%}
+.tl .w{flex:1;min-width:0}
+.secondary .c{display:block}
+.eat .c .no{display:block;text-align:center;line-height:20px}
+.foot{display:flex;flex-wrap:wrap;gap:7px 15px}
+.foot .cta{flex:1}.foot .credits{width:100%;flex:none}
+.hero h3{max-width:100%;width:100%}
+.tl li{padding-bottom:6px}
+.two{margin-top:5mm}
+.running{margin-bottom:8px}
+.secondary img{height:14mm}
+.second>.lab{margin-top:4mm!important}
+.second>.running+.lab{margin-top:0!important}
+.rank{display:inline-block;font-family:Inter,sans-serif;font-size:7pt;font-weight:800;vertical-align:middle;color:var(--red);margin-right:5px;letter-spacing:0}
+.featured .rank{font-size:9pt;margin-right:7px}
+.foot{bottom:7mm}
+.strip.hy .h{writing-mode:horizontal-tb;transform:none;color:var(--red)}
+.strip.hy .h.go{color:var(--teal)}
+a.hero,a.i{display:block}
+.tl .w a,.sun a,.strip a,ul.b a,.tk .w a{color:inherit}
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page one">
+  <div class="mast">
+    <div>
+      <div class="name">Kay<span>poh</span></div>
+      <div class="tag">Where to go, what to eat, what to book. Sorted lah.</div>
+    </div>
+    <div class="meta">Issue 006<br>Thu 22 Oct 2026<br>Covers Thu 22 – Wed 28 Oct</div>
+  </div>
+
+  <a class="hero" href="https://www.teamlab.art/e/supperhouse/">
+    <img src="https://teamlab-site.imagewave.pictures/b5EBo9Uo-OK6SM09ZTkEZQ/4e9914c2-0d6c-495a-0f52-36d2b1e5b400/width=1920,quality=100" alt="teamLab digital flowers blooming across a dark wall at Supper House">
+    <div class="ov"></div>
+    <span class="pin">The One Thing · Free</span>
+    <div class="txt">
+      <div class="kick">Supper House, Tanjong Pagar Distripark · to Sun 8 Nov</div>
+      <h3>A free teamLab, indoors,<br>by the new Circle Line stop</h3>
+      <ul>
+        <li><b>Sat 12–7pm, Sun 12–5pm:</b> eight works, incl. a gold digital waterfall. Go at noon.</li>
+        <li><b>Free entry.</b> 37 Keppel Rd #04-02. Cantonment MRT, Exit 4.</li>
+        <li><b>The flowers follow real sunrise and sunset,</b> so no two visits look the same.</li>
+      </ul>
+    </div>
+  </a><div class="tldr">
+    <div class="h">This week in 10 seconds</div>
+    <a class="i" href="https://www.teamlab.art/e/supperhouse/"><b>Go</b><strong>teamLab: Infinite Existence,</strong><span>Supper House, Thu–Sun from noon.</span><small>Free. Indoors, haze-proof.</small></a>
+    <a class="i" href="https://www.osteriadasu.com"><b>Eat</b><strong>Osteria Da Su.</strong><span>NAE:UM's Italian room, by a Da Vittorio alum.</span><small>Opens Fri 23. Pastas $20–36++.</small></a>
+    <a class="i" href="https://thekallang.com.sg/events/westlife-25-anniversary-world-tour"><b>Book</b><strong>Westlife, Mon 18 Jan,</strong><span>the third night. 16–17 Jan sold out.</span><small>$138–328, Ticketmaster.</small></a>
+  </div>
+
+
+
+  <div class="two"><div class="plan">
+      <div class="lab"><h2>The Weekend Plan</h2><span class="k">Saturday · Keppel to Telok Ayer</span></div>
+      <div class="cost">
+        <div><b>$120</b>brunch, happy hour, dinner</div>
+        <div><b>$25</b>French toast, free stops only</div>
+        <div><b>5 stops</b>one Grab, rest on foot</div>
+      </div>
+      <ul class="tl">
+        <li><div class="tm">11am</div><div class="w"><a href="https://www.singaporeartmuseum.sg/art-events/exhibitions/brandon-tay-sangkalan"><b>SAM, Tanjong Pagar Distripark</b></a><span>Brandon Tay's Sangkalan. Last weekend.</span><em class="route-marker">FREE FOR SC/PR · CANTONMENT MRT</em></div></li>
+        <li><div class="tm">12.30pm</div><div class="w"><a href="https://www.teamlab.art/e/supperhouse/"><b>teamLab, Supper House</b></a><span>Next block over. Allow 45 minutes.</span><em class="route-marker">ON FOOT · 2 MIN</em></div></li>
+        <li><div class="tm">2pm</div><div class="w"><a href="https://www.instagram.com/calendarcoffeesg/"><b>Calendar Coffee, South Bridge Rd</b></a><span>June Coffee's new shop. French toast $11–14++.</span><em class="route-marker">GRAB · 10 MIN</em></div></li>
+        <li><div class="tm">6pm</div><div class="w"><a href="https://www.instagram.com/histranger.sg/"><b>Hi Stranger, Neil Rd</b></a><span>Happy hour to 8pm: $16 with prawn toast.</span><em class="route-marker">ON FOOT · 5 MIN</em></div></li>
+        <li><div class="tm">8pm</div><div class="w"><a href="https://www.osteriadasu.com"><b>Osteria Da Su, Telok Ayer St</b></a><span>Opening weekend. Half the seats are walk-in.</span><em class="route-marker">ON FOOT · 10 MIN</em></div></li>
+      </ul>
+      <div class="sun"><b>Sunday, low effort</b>Saree try-on, 10am–5pm, at the <a href="https://www.indianheritage.gov.sg/en/whats-on/programmes/deepavali-2026">IHC Deepavali Open House</a>. Free for SC/PR. Check <a href="https://www.haze.gov.sg">haze.gov.sg</a> first.</div>
+    </div>
+    <div class="tickets">
+      <div class="lab"><h2>Ticket Alarm</h2><span class="k">Checked Thu morning</span></div>
+      <a href="https://thekallang.com.sg/events/westlife-25-anniversary-world-tour" class="tile">
+        <img src="https://thekallang.com.sg/sites/default/files/2026-05/20270117_Westlife_410x290_0.png" alt="Westlife 25 anniversary world tour artwork">
+        <div class="ov"></div>
+        <span class="pin">Night added</span>
+        <div class="t"><b>Westlife 25 · Mon 18 Jan 2027, Indoor Stadium</b><span>16 and 17 Jan shows sold out on Ticketmaster.</span><span>Third night, 8pm, $138–328. Don't wait.</span></div>
+      </a>
+      <ul class="tk">
+        <li><span class="st wk">This week</span><div class="w"><a href="https://www.esplanade.com/whats-on/2026/the-sunny-side-up-goes-hiking-concert-tour-hiking-stop-2-singapore"><b>Bobby Chen · Sat 24 Oct, Esplanade</b></a><span>Concert Hall, 7.30pm. $88–188, BookMyShow.</span></div></li>
+        <li><span class="st wk">This week</span><div class="w"><a href="https://www.thestar.sg/events/rosetopia-asia-tour-2026-in-singapore"><b>The Rose · Tue 27 Oct, Star Theatre</b></a><span>First Singapore show. 7.30pm, $118–328, BookMyShow.</span></div></li>
+        <li><span class="st on">On sale</span><div class="w"><a href="https://www.damienrice.com/"><b>Damien Rice · 16–17 Feb 2027, Capitol</b></a><span>O at 25. General sale Fri 23, 10am, Ticketmaster.</span></div></li>
+        <li><span class="st pp">Moved</span><div class="w"><a href="https://thekallang.com.sg/events/my-chemical-romance-live-singapore-2026"><b>My Chemical Romance · 10–11 Nov, Indoor Stadium</b></a><span>Moved from April. 8pm, $148–408, SISTIC.</span></div></li>
+        <li><span class="st on">On sale</span><div class="w"><a href="https://thekallang.com.sg/events/simple-plan-bigger-you-think-tour"><b>Simple Plan · Sun 22 Nov, Indoor Stadium</b></a><span>Welcome to My Life, live. 8pm, $98–148, SISTIC.</span></div></li>
+        <li><span class="st on">On sale</span><div class="w"><a href="https://thekallang.com.sg/events/guns-n-roses-world-tour-2026"><b>Guns N' Roses · Wed 25 Nov, National Stadium</b></a><span>One night only. 8pm, doors 6pm, Ticketmaster.</span></div></li>
+      </ul>
+    </div>
+
+
+  </div>
+  <div class="pgno">01</div>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page second"><div class="running"><span>Kay<b>poh</b></span><span>ISSUE 006 / THU 22 OCT 2026</span></div>
+  <div class="lab"><h2>Eat This Week</h2><span class="k">Five picks · prices per person</span></div>
+  <div class="eat">
+    <a class="c featured" href="https://www.osteriadasu.com"><img src="https://www.osteriadasu.com/wp-content/uploads/2026/10/osteria-da-su-tortelli.webp" alt="Galbi jjim tortelli at Osteria Da Su"><div class="b"><div class="pick">KAYPOH SAYS / THE FIRST PICK</div><div class="n"><div class="rank">1</div>Osteria Da Su</div><div class="pr">About $45–70++ · pastas $20–36++</div><div class="tags"><span class="tg bk">Book</span><span class="tg vb">Date night</span></div><div class="ln"><b>Order:</b> tortelli di galbi jjim, $30++. Dalgona tiramisu, $14++.</div><div class="ln verdict"><b>Why:</b> Chef Suji Park, ex-Da Vittorio. The Italian room from one-star NAE:UM's team.</div><div class="ln"><b>Go:</b> 163 Telok Ayer St · Telok Ayer MRT · Tue–Sat 5.30–10pm. Opens Fri 23.</div></div></a>
+
+
+
+
+  <div class="secondary"><a class="c" href="https://www.petrarestaurant.sg"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2026%2009%2018%20Petra_Food_Hummus-aVribmDbfiRQ04UOUgKxMl0ZqJZpIv.jpg" alt="Hummus with olive oil at Petra"><div class="b"><div class="n"><div class="rank">2</div>Petra</div><div class="pr">About $50–80++</div><div class="tags"><span class="tg bk">Book</span><span class="tg vb">Group</span></div><div class="ln"><b>Order:</b> whole grilled lavrak for 3–4, $108++.</div><div class="ln"><b>Why:</b> Levantine from La Bottega's owner, ex-Ottolenghi chef consulting.</div><div class="ln"><b>Go:</b> 40C Harding Rd, Dempsey · Napier MRT · opens Sat 24.</div></div></a><a class="c" href="https://www.instagram.com/ducoosg/"><img src="https://sethlui.com/wp-content/uploads/2026/09/Sophies-17.jpg" alt="Prawn aglio olio at Ducoo hawker stall"><div class="b"><div class="n"><div class="rank">3</div>Ducoo</div><div class="pr">$6–13</div><div class="tags"><span class="tg">Walk-in</span><span class="tg vb">Under $25</span></div><div class="ln"><b>Order:</b> rigatoni carbonara with guanciale, $10.50.</div><div class="ln"><b>Why:</b> two young chefs' first stall. Check before you go.</div><div class="ln"><b>Go:</b> North Bridge Rd Food Centre #01-113 · Lavender MRT.</div></div></a><a class="c" href="https://www.shirazi.sg"><img src="https://www.shirazi.sg/assets/img/food-koobideh.jpg" alt="Charcoal-grilled koobideh kebab at Shirazi"><div class="b"><div class="n"><div class="rank">4</div>Shirazi</div><div class="pr">kebabs $34–65 · nett on weekdays</div><div class="tags"><span class="tg bk">Book</span><span class="tg vb">Date night</span></div><div class="ln"><b>Order:</b> chicken koobideh, $34. Faloodeh to finish, $18.</div><div class="ln"><b>Why:</b> charcoal Persian kebabs from a 20-year chef duo.</div><div class="ln"><b>Go:</b> 8 Dempsey Rd · Napier MRT · closed Mon.</div></div></a><a class="c" href="https://www.wunderfolks.com/rawrcafe"><img src="https://eatbook.sg/wp-content/uploads/2026/10/Rawr-nasi-lemak-burger-interaction.jpg" alt="Nasi lemak chicken burger at Rawr Cafe"><div class="b"><div class="n"><div class="rank">5</div>Rawr Cafe</div><div class="pr">$18–24++</div><div class="tags"><span class="tg">Walk-in</span><span class="tg vb">Brunch</span></div><div class="ln"><b>Order:</b> nasi lemak chicken burger, $18++. Kaya toast latte.</div><div class="ln"><b>Why:</b> Oh Wunder team's new tiger-themed café. Opened 17 Oct.</div><div class="ln"><b>Go:</b> 134 Jalan Besar · Jalan Besar MRT · daily from 9.30am.</div></div></a></div></div>
+  <div class="strip">
+    <div class="h">Drink</div>
+    <div class="i"><a href="https://www.instagram.com/histranger.sg/"><b>Hi Stranger, Neil Rd</b></a>Spirits by the 10ml pour. Happy hour 6–8pm. Check before you go.</div>
+    <div class="i"><a href="https://www.instagram.com/barmiddle/"><b>Bar Middle, Hongkong St</b></a>20-seat Japanese classic-cocktail bar. Check before you go.</div>
+  </div>
+  <div class="strip" style="margin-top:6px">
+    <div class="h">Coffee</div>
+    <div class="i"><a href="https://www.instagram.com/calendarcoffeesg/"><b>Calendar Coffee, South Bridge Rd</b></a>June Coffee team, new shop. French toast. Maxwell MRT.</div>
+    <div class="i"><a href="https://velabkk.com"><b>VE/LA, Changi T1 Arrivals</b></a>Bangkok matcha bar's first SG shop.</div>
+  </div>
+
+  <div class="lab" style="margin-top:6mm"><h2>Pop-ups &amp; Drops</h2><span class="k">This week and next</span></div>
+  <div class="pop">
+    <a class="c" href="https://artshousegroup.sg/gac-homeground"><img src="https://artshousegroup.sg/images/venues-microsite/gac/events/2026/homeground/Ground-goods.png" alt="Ground Goods Car(t) Boot Market illustration"><span class="pin">Sat only</span><div class="b"><div class="n">Car(t) Boot Market</div><div class="ln"><b>What:</b> makers' market and food trucks at HOME|GROUND. Moto gear, prints, DJs.</div><div class="ln"><b>Go:</b> Goodman Arts Centre carpark · Sat 24, 4–10pm · Mountbatten MRT.</div></div></a>
+    <a class="c" href="https://www.singaporeexpo.com.sg/events-at-expo/the-big-fashion-hunt/"><img src="https://www.singaporeexpo.com.sg/wp-content/uploads/2026/10/Expo-Event-Key-Visual-Ynes-Nar.jpg" alt="The Big Fashion Hunt key visual"><span class="pin gold">Register now</span><div class="b"><div class="n">The Big Fashion Hunt</div><div class="ln"><b>What:</b> 30,000 new e-com returns, $5–25. Register on Eventbrite: one free item.</div><div class="ln"><b>Go:</b> EXPO Hall 5A · Sat 31 Oct–Sun 1 Nov · 10am–9pm · free.</div></div></a>
+    <a class="c" href="https://www.indianheritage.gov.sg/en/whats-on/programmes/deepavali-2026"><img src="https://www.indianheritage.gov.sg/api/media/8923d2aa-7536-4172-b5c7-511cbf946e43/DN7A9867.jpg" alt="Dancers performing at the Indian Heritage Centre"><span class="pin ink">Seasonal</span><div class="b"><div class="n">IHC Deepavali Open House</div><div class="ln"><b>What:</b> heirloom saree try-on, bazaar, weekend shows. Sat museum tour, 7pm.</div><div class="ln"><b>Go:</b> 5 Campbell Lane · to Sun 8 Nov · Sat to 8pm · Little India MRT.</div></div></a>
+  </div>
+  <div class="more">
+    <div><span class="h">Also on</span>
+      <ul class="b">
+        <li><a href="https://www.sipf.sg/"><b>Not the Merlion:</b></a> SIPF photos in a Geylang shophouse. From $15.</li>
+      </ul>
+    </div>
+    <div><span class="h">Last call · by Sun 25</span>
+      <ul class="b">
+        <li><a href="https://www.singaporeartmuseum.sg/art-events/exhibitions/open-systems"><b>Open Systems 3</b></a> · SAM · free for SC/PR.</li>
+        <li><a href="https://feverup.com/m/741054"><b>Bloomyard</b></a> · Gardens by the Bay · Fri–Sun · $12.60.</li>
+      </ul>
+    </div>
+    <div><span class="h">Next week</span>
+      <ul class="b">
+        <li><a href="https://www.singaporeexpo.com.sg/events-at-expo/the-makers-ground-at-expo/"><b>The Makers Ground</b></a> · EXPO · Sat 31–Sun 1 · free.</li>
+        <li><a href="https://www.deepavali.sg/events/sangeetham-under-the-stars"><b>Sangeetham Under the Stars</b></a> · Campbell Lane · Sat 31, 8pm.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="lab" style="margin-top:6mm"><h2>Hype Check</h2><span class="k">Kaypoh says · Worth the queue?</span></div>
+  <div class="strip hy verdict-panel">
+    <div class="h go">Go</div>
+    <div class="i"><a href="https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/sunflower-surprise-2026.html"><b>Sunflower Surprise, Flower Dome</b></a>5,000 sunflowers, a mini Lisbon. $12, indoors, to Mon 9 Nov.</div>
+    <div class="h skip">Skip</div>
+    <div class="i"><a href="https://thefirstfan.sg/"><b>The First Fan, Clarke Quay</b></a>Book-ahead pass, merch sold out online, toys need a $200 spend.</div>
+  </div>
+
+  <div class="foot">
+    <div class="cta">Forward this to the friend<br>who always says <span>"anything lah."</span></div>
+    <div class="share-stamp">PASS IT<br>ON ↗</div><div class="credits">Every name is a link to the official page. Photos: teamLab, The Kallang / UnUsUaL Entertainment, Osteria Da Su, Petra, Seth Lui, Shirazi, Eatbook, Arts House Group, Singapore EXPO / GRNEO, Indian Heritage Centre.</div>
+  </div>
+  <div class="pgno">02</div>
+</div>
+
+
+
+
+
+<!-- Fit guard (10 Sep 2026, v2: page 1 too). Both pages are a fixed 297mm with an absolutely positioned footer,
+     so any overflow prints on top of the footer (issue 001 r3, page 2). After fonts load, every
+     block above the footer is zoomed down together, 1% at a time (floor 88%), until it clears the
+     footer. data-fit on each .page is read by render.sh, which warns the editor to cut a line. -->
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.page').forEach(function(page){
+      // page 2 has a pinned footer; page 1 has none, so its limit is the page's own bottom padding
+      var foot=page.querySelector('.foot');
+      var kids=Array.prototype.filter.call(page.children,function(e){
+        return !e.classList.contains('foot')&&!e.classList.contains('pgno')});
+      if(!kids.length) return;
+      var gap=8, z=1;
+      function limit(){
+        if(foot) return foot.getBoundingClientRect().top-gap;
+        var pad=parseFloat(getComputedStyle(page).paddingBottom)||0;
+        return page.getBoundingClientRect().bottom-pad-gap;
+      }
+      function over(){
+        var b=0; kids.forEach(function(k){b=Math.max(b,k.getBoundingClientRect().bottom)});
+        return b-limit();
+      }
+      while(over()>0 && z>0.88){
+        z=Math.round((z-0.01)*100)/100;
+        kids.forEach(function(k){k.style.zoom=z});
+      }
+      page.setAttribute('data-fit', z.toFixed(2));
+      if(over()>0) page.setAttribute('data-overflow', String(Math.round(over())));
+    });
+    document.documentElement.setAttribute('data-fit-done','1');
+  }
+  function go(){ (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(fit,fit); }
+  if(document.readyState==='complete') go(); else window.addEventListener('load',go);
+})();
+</script>
+</body></html>
