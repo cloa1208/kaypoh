@@ -23,7 +23,7 @@ Kaypoh is a weekly, two-page Singapore newsletter for one reader and his friends
 
 **This week in 10 seconds.** Three lines: Go, Eat, Book. A reader who stops here should still be able to act.
 
-**Ticket Alarm.** Six rows max. Lead with anything a 90s kid grew up on (90s and 2000s acts, F1 concert headliners, Singapore icons like Kit Chan). Each row gets a status pill: On sale, Resale, This week, Moved. Verify every show is still on. Check the venue's own event page for cancellation or postponement notices before including it. Cancelled shows must not appear.
+**Ticket Alarm.** One featured tile plus six status rows at most, as in the template. Lead with anything a 90s kid grew up on (90s and 2000s acts, F1 concert headliners, Singapore icons like Kit Chan). Each row gets a status pill: On sale, Resale, This week, Moved. Verify every show is still on. Check the venue's own event page for cancellation or postponement notices before including it. Cancelled shows must not appear.
 
 **The Weekend Plan.** One Saturday, four to five timed stops, one MRT hop or one Grab, the rest on foot. Two cost figures: full plan, and the cheap version. One line for Sunday.
 
@@ -42,6 +42,18 @@ Kaypoh is a weekly, two-page Singapore newsletter for one reader and his friends
 **Not the Merlion.** One off-beat attraction, inside Also on. Free if possible.
 
 **Hype Check.** One Go and one Skip. Two lines each: what it is, verdict.
+
+## Reader feedback
+
+Calvin tells Mira what he liked and disliked. Mira keeps it in a private taste profile on the mini, and the weekly run hands the editor a copy. The profile never goes into this repo.
+
+- Use the profile to rank picks that already meet this brief. It never overrides the category mix, the verification rules or the design.
+- Firm items always apply. Standing items carry strong weight. Tentative items only break ties. Temporary items apply until their date.
+- If a preference conflicts with this brief, follow the brief and report the conflict. Do not apply it quietly.
+- Keep one pick each week chosen on merit alone, so discovery continues. Mark it in the receipt.
+- No good match is an acceptable outcome. Never force a weak pick to show the feedback was used.
+- Past inclusion and silence are not feedback.
+- Never mention the feedback, the profile or Calvin's taste in the issue or in the public notes file.
 
 ## Links
 
